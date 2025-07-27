@@ -1,0 +1,283 @@
+import { useState } from "react";
+import { NavBar } from "@/components/NavBar";
+import { PasswordPrompt } from "@/components/PasswordPrompt";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { Settings, Shield, Bell, Eye, EyeOff, Smartphone, Info } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+interface SettingsPageProps {
+  password: string;
+  onPasswordChange: (newPassword: string) => void;
+}
+
+export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) => {
+  const [showPasswordPrompt, setShowPasswordPrompt] = useState(false);
+  const [pendingAction, setPendingAction] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [notifications, setNotifications] = useState(true);
+  const [autoLock, setAutoLock] = useState(false);
+  const { toast } = useToast();
+
+  const handleChangePassword = () => {
+    setPendingAction("change password");
+    setShowPasswordPrompt(true);
+  };
+
+  const handlePasswordVerified = () => {
+    setShowPasswordPrompt(false);
+    setPendingAction("");
+    
+    if (pendingAction === "change password") {
+      // Show password change form
+      toast({
+        title: "Password verified",
+        description: "You can now set a new password",
+      });
+    }
+  };
+
+  const handlePasswordCancel = () => {
+    setShowPasswordPrompt(false);
+    setPendingAction("");
+  };
+
+  const handleSaveNewPassword = () => {
+    if (newPassword.length < 4) {
+      toast({
+        title: "Password too short",
+        description: "Password must be at least 4 characters long",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      toast({
+        title: "Passwords don't match",
+        description: "Please make sure both passwords are identical",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    onPasswordChange(newPassword);
+    setNewPassword("");
+    setConfirmPassword("");
+    toast({
+      title: "Password updated successfully",
+      description: "Your new password is now active",
+    });
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      <NavBar />
+      
+      <div className="max-w-md mx-auto p-4 space-y-6">
+        {/* Page Header */}
+        <div className="text-center py-4">
+          <h1 className="text-2xl font-bold text-parentControl mb-2">Settings</h1>
+          <p className="text-muted-foreground">Manage your parental controls</p>
+        </div>
+
+        {/* Security Settings */}
+        <Card className="bg-gradient-card border-primary/10 shadow-card">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg font-semibold text-parentControl flex items-center">
+              <Shield className="mr-2 h-5 w-5 text-primary" />
+              Security
+            </CardTitle>
+            <CardDescription>
+              Manage password and security settings
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <Button
+              onClick={handleChangePassword}
+              variant="outline"
+              className="w-full justify-start hover:border-primary/50"
+            >
+              <Settings className="mr-2 h-4 w-4" />
+              Change Password
+            </Button>
+
+            {(pendingAction === "change password" && !showPasswordPrompt) && (
+              <div className="space-y-4 p-4 bg-accent rounded-lg">
+                <h3 className="font-medium text-parentControl">Set New Password</h3>
+                
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-parentControl">
+                    New Password
+                  </label>
+                  <div className="relative">
+                    <Input
+                      type={showNewPassword ? "text" : "password"}
+                      placeholder="Enter new password"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      className="border-primary/20 focus:border-primary pr-10"
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                      onClick={() => setShowNewPassword(!showNewPassword)}
+                    >
+                      {showNewPassword ? (
+                        <EyeOff className="h-4 w-4 text-muted-foreground" />
+                      ) : (
+                        <Eye className="h-4 w-4 text-muted-foreground" />
+                      )}
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-parentControl">
+                    Confirm New Password
+                  </label>
+                  <div className="relative">
+                    <Input
+                      type={showConfirmPassword ? "text" : "password"}
+                      placeholder="Confirm new password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      className="border-primary/20 focus:border-primary pr-10"
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    >
+                      {showConfirmPassword ? (
+                        <EyeOff className="h-4 w-4 text-muted-foreground" />
+                      ) : (
+                        <Eye className="h-4 w-4 text-muted-foreground" />
+                      )}
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="flex space-x-3">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setPendingAction("");
+                      setNewPassword("");
+                      setConfirmPassword("");
+                    }}
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={handleSaveNewPassword}
+                    className="flex-1 bg-gradient-primary"
+                  >
+                    Save Password
+                  </Button>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* App Settings */}
+        <Card className="bg-gradient-card border-primary/10 shadow-card">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg font-semibold text-parentControl flex items-center">
+              <Smartphone className="mr-2 h-5 w-5 text-primary" />
+              App Settings
+            </CardTitle>
+            <CardDescription>
+              Customize app behavior and notifications
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <div className="flex items-center space-x-2">
+                  <Bell className="h-4 w-4 text-muted-foreground" />
+                  <span className="font-medium text-parentControl">Notifications</span>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Get alerts when Kid Mode changes
+                </p>
+              </div>
+              <Switch
+                checked={notifications}
+                onCheckedChange={setNotifications}
+              />
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <div className="flex items-center space-x-2">
+                  <Shield className="h-4 w-4 text-muted-foreground" />
+                  <span className="font-medium text-parentControl">Auto-lock</span>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Require password after 5 minutes
+                </p>
+              </div>
+              <Switch
+                checked={autoLock}
+                onCheckedChange={setAutoLock}
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* About */}
+        <Card className="bg-gradient-secondary/10 border-secondary/30">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg font-semibold text-parentControl flex items-center">
+              <Info className="mr-2 h-5 w-5 text-secondary" />
+              About Parental Panel
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="text-sm text-muted-foreground space-y-2">
+              <p><strong>Version:</strong> 1.0.0</p>
+              <p><strong>Purpose:</strong> Help parents manage their child's internet access through simple, secure controls.</p>
+              <p><strong>Note:</strong> This app provides interface controls. Actual network restriction depends on your device's parental control settings.</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Emergency Reset */}
+        <Card className="bg-destructive/5 border-destructive/20">
+          <CardContent className="p-4">
+            <div className="text-center space-y-3">
+              <h3 className="font-medium text-destructive">Emergency Reset</h3>
+              <p className="text-sm text-muted-foreground">
+                If you forget your password, you'll need to reinstall the app
+              </p>
+              <Button variant="outline" size="sm" className="border-destructive/50 text-destructive hover:bg-destructive/10">
+                Learn More
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {showPasswordPrompt && (
+        <PasswordPrompt
+          onPasswordVerified={handlePasswordVerified}
+          onCancel={handlePasswordCancel}
+          correctPassword={password}
+          action={pendingAction}
+        />
+      )}
+    </div>
+  );
+};
