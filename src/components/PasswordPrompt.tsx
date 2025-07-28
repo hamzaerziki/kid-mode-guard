@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Eye, EyeOff, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 
 interface PasswordPromptProps {
   onPasswordVerified: () => void;
@@ -17,6 +18,7 @@ export const PasswordPrompt = ({ onPasswordVerified, onCancel, correctPassword, 
   const [showPassword, setShowPassword] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,9 +56,9 @@ export const PasswordPrompt = ({ onPasswordVerified, onCancel, correctPassword, 
               <div className="mx-auto mb-3 p-3 bg-primary/10 rounded-full w-fit">
                 <Shield className="h-6 w-6 text-primary" />
               </div>
-              <CardTitle className="text-xl font-bold text-parentControl">Parent Verification</CardTitle>
+              <CardTitle className="text-xl font-bold text-parentControl">{t("password.prompt")}</CardTitle>
               <CardDescription className="text-muted-foreground">
-                Enter password to {action}
+                {t("password.promptDescription")}
               </CardDescription>
             </div>
             <Button
@@ -74,12 +76,12 @@ export const PasswordPrompt = ({ onPasswordVerified, onCancel, correctPassword, 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <label className="text-sm font-medium text-parentControl">
-                Password
+                {t("password.enterPassword")}
               </label>
               <div className="relative">
                 <Input
                   type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
+                  placeholder={t("password.enterPassword")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="border-primary/20 focus:border-primary pr-10"
@@ -118,7 +120,7 @@ export const PasswordPrompt = ({ onPasswordVerified, onCancel, correctPassword, 
                 onClick={onCancel}
                 className="flex-1"
               >
-                Cancel
+                {t("common.cancel")}
               </Button>
               <Button 
                 type="submit" 
@@ -126,7 +128,7 @@ export const PasswordPrompt = ({ onPasswordVerified, onCancel, correctPassword, 
                 disabled={attempts >= 3}
               >
                 <Shield className="mr-2 h-4 w-4" />
-                Verify
+                {t("password.unlock")}
               </Button>
             </div>
           </form>

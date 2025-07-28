@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, ShieldOff, Clock, Wifi, WifiOff } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 interface KidModeToggleProps {
   isActive: boolean;
@@ -11,6 +12,7 @@ interface KidModeToggleProps {
 }
 
 export const KidModeToggle = ({ isActive, onToggle, timeRemaining }: KidModeToggleProps) => {
+  const { t } = useTranslation();
   const formatTime = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -44,10 +46,10 @@ export const KidModeToggle = ({ isActive, onToggle, timeRemaining }: KidModeTogg
           "text-3xl font-bold",
           isActive ? "text-kidMode-active" : "text-kidMode-inactive"
         )}>
-          Kid Mode
+          {t("kidMode.title")}
         </CardTitle>
         <CardDescription className="text-lg">
-          {isActive ? "Internet access is restricted" : "Internet access is allowed"}
+          {isActive ? t("kidMode.activeDescription") : t("kidMode.inactiveDescription")}
         </CardDescription>
       </CardHeader>
       
@@ -66,7 +68,7 @@ export const KidModeToggle = ({ isActive, onToggle, timeRemaining }: KidModeTogg
               "font-medium",
               isActive ? "text-kidMode-active" : "text-kidMode-inactive"
             )}>
-              {isActive ? "Blocked" : "Active"}
+              {isActive ? t("kidMode.blocked") : t("kidMode.active")}
             </span>
           </div>
         </div>
@@ -75,7 +77,7 @@ export const KidModeToggle = ({ isActive, onToggle, timeRemaining }: KidModeTogg
           <div className="text-center p-4 bg-kidMode-active/5 rounded-lg">
             <div className="flex items-center justify-center space-x-2 mb-2">
               <Clock className="h-5 w-5 text-kidMode-active" />
-              <span className="text-sm font-medium text-kidMode-active">Time Remaining</span>
+              <span className="text-sm font-medium text-kidMode-active">{t("kidMode.timeRemaining")}</span>
             </div>
             <div className="text-2xl font-bold text-kidMode-active">
               {formatTime(timeRemaining)}
@@ -95,12 +97,12 @@ export const KidModeToggle = ({ isActive, onToggle, timeRemaining }: KidModeTogg
           {isActive ? (
             <>
               <Shield className="mr-2 h-5 w-5" />
-              Deactivate Kid Mode
+              {t("kidMode.deactivate")}
             </>
           ) : (
             <>
               <ShieldOff className="mr-2 h-5 w-5" />
-              Activate Kid Mode
+              {t("kidMode.activate")}
             </>
           )}
         </Button>
@@ -108,8 +110,8 @@ export const KidModeToggle = ({ isActive, onToggle, timeRemaining }: KidModeTogg
         <div className="text-center">
           <p className="text-sm text-muted-foreground">
             {isActive 
-              ? "Your child's internet access is now restricted" 
-              : "Your child has full internet access"
+              ? t("kidMode.restrictedMessage")
+              : t("kidMode.allowedMessage")
             }
           </p>
         </div>

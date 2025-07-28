@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { NavBar } from "@/components/NavBar";
 import { PasswordPrompt } from "@/components/PasswordPrompt";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { Settings, Shield, Bell, Eye, EyeOff, Smartphone, Info } from "lucide-react";
+import { Settings, Shield, Bell, Eye, EyeOff, Smartphone, Info, Globe } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 
 interface SettingsPageProps {
   password: string;
@@ -23,6 +25,7 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
   const [notifications, setNotifications] = useState(true);
   const [autoLock, setAutoLock] = useState(false);
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const handleChangePassword = () => {
     setPendingAction("change password");
@@ -34,10 +37,9 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
     setPendingAction("");
     
     if (pendingAction === "change password") {
-      // Show password change form
       toast({
-        title: "Password verified",
-        description: "You can now set a new password",
+        title: t("password.success"),
+        description: t("password.promptDescription"),
       });
     }
   };
@@ -48,10 +50,10 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
   };
 
   const handleSaveNewPassword = () => {
-    if (newPassword.length < 4) {
+    if (newPassword.length < 6) {
       toast({
-        title: "Password too short",
-        description: "Password must be at least 4 characters long",
+        title: t("password.passwordRequired"),
+        description: t("password.minLength"),
         variant: "destructive",
       });
       return;
@@ -59,8 +61,8 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
 
     if (newPassword !== confirmPassword) {
       toast({
-        title: "Passwords don't match",
-        description: "Please make sure both passwords are identical",
+        title: t("password.passwordsDontMatch"),
+        description: t("password.passwordsDontMatch"),
         variant: "destructive",
       });
       return;
@@ -70,8 +72,8 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
     setNewPassword("");
     setConfirmPassword("");
     toast({
-      title: "Password updated successfully",
-      description: "Your new password is now active",
+      title: t("password.success"),
+      description: t("password.success"),
     });
   };
 
@@ -82,19 +84,35 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
       <div className="max-w-md mx-auto p-4 space-y-6">
         {/* Page Header */}
         <div className="text-center py-4">
-          <h1 className="text-2xl font-bold text-parentControl mb-2">Settings</h1>
-          <p className="text-muted-foreground">Manage your parental controls</p>
+          <h1 className="text-2xl font-bold text-parentControl mb-2">{t("settings.title")}</h1>
+          <p className="text-muted-foreground">{t("settings.passwordManagement")}</p>
         </div>
+
+        {/* Language Settings */}
+        <Card className="bg-gradient-card border-primary/10 shadow-card">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg font-semibold text-parentControl flex items-center">
+              <Globe className="mr-2 h-5 w-5 text-primary" />
+              {t("settings.language")}
+            </CardTitle>
+            <CardDescription>
+              {t("settings.languageDescription")}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <LanguageSwitcher />
+          </CardContent>
+        </Card>
 
         {/* Security Settings */}
         <Card className="bg-gradient-card border-primary/10 shadow-card">
           <CardHeader className="pb-4">
             <CardTitle className="text-lg font-semibold text-parentControl flex items-center">
               <Shield className="mr-2 h-5 w-5 text-primary" />
-              Security
+              {t("settings.passwordManagement")}
             </CardTitle>
             <CardDescription>
-              Manage password and security settings
+              {t("settings.changePasswordDescription")}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -104,21 +122,21 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
               className="w-full justify-start hover:border-primary/50"
             >
               <Settings className="mr-2 h-4 w-4" />
-              Change Password
+              {t("settings.changePassword")}
             </Button>
 
             {(pendingAction === "change password" && !showPasswordPrompt) && (
               <div className="space-y-4 p-4 bg-accent rounded-lg">
-                <h3 className="font-medium text-parentControl">Set New Password</h3>
+                <h3 className="font-medium text-parentControl">{t("password.enterPassword")}</h3>
                 
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-parentControl">
-                    New Password
+                    {t("password.enterPassword")}
                   </label>
                   <div className="relative">
                     <Input
                       type={showNewPassword ? "text" : "password"}
-                      placeholder="Enter new password"
+                      placeholder={t("password.enterPassword")}
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
                       className="border-primary/20 focus:border-primary pr-10"
@@ -141,12 +159,12 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
 
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-parentControl">
-                    Confirm New Password
+                    {t("password.confirmPassword")}
                   </label>
                   <div className="relative">
                     <Input
                       type={showConfirmPassword ? "text" : "password"}
-                      placeholder="Confirm new password"
+                      placeholder={t("password.confirmPassword")}
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       className="border-primary/20 focus:border-primary pr-10"
@@ -177,13 +195,13 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
                     }}
                     className="flex-1"
                   >
-                    Cancel
+                    {t("common.cancel")}
                   </Button>
                   <Button
                     onClick={handleSaveNewPassword}
                     className="flex-1 bg-gradient-primary"
                   >
-                    Save Password
+                    {t("common.save")}
                   </Button>
                 </div>
               </div>
@@ -196,10 +214,10 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
           <CardHeader className="pb-4">
             <CardTitle className="text-lg font-semibold text-parentControl flex items-center">
               <Smartphone className="mr-2 h-5 w-5 text-primary" />
-              App Settings
+              {t("settings.title")}
             </CardTitle>
             <CardDescription>
-              Customize app behavior and notifications
+              {t("settings.languageDescription")}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -242,7 +260,7 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
           <CardHeader className="pb-4">
             <CardTitle className="text-lg font-semibold text-parentControl flex items-center">
               <Info className="mr-2 h-5 w-5 text-secondary" />
-              About Parental Panel
+              {t("navbar.title")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -258,7 +276,7 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
         <Card className="bg-destructive/5 border-destructive/20">
           <CardContent className="p-4">
             <div className="text-center space-y-3">
-              <h3 className="font-medium text-destructive">Emergency Reset</h3>
+              <h3 className="font-medium text-destructive">{t("settings.resetData")}</h3>
               <p className="text-sm text-muted-foreground">
                 If you forget your password, you'll need to reinstall the app
               </p>

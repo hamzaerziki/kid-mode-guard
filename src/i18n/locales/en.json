@@ -1,0 +1,63 @@
+{
+  "navbar": {
+    "title": "Parental Panel",
+    "dashboard": "Dashboard",
+    "timer": "Timer",
+    "settings": "Settings"
+  },
+  "kidMode": {
+    "title": "Kid Mode",
+    "activeDescription": "Internet access is restricted",
+    "inactiveDescription": "Internet access is allowed",
+    "blocked": "Blocked",
+    "active": "Active",
+    "timeRemaining": "Time Remaining",
+    "activate": "Activate Kid Mode",
+    "deactivate": "Deactivate Kid Mode",
+    "restrictedMessage": "Your child's internet access is now restricted",
+    "allowedMessage": "Your child has full internet access"
+  },
+  "timer": {
+    "title": "Timer Controls",
+    "quickSelect": "Quick Select",
+    "customTime": "Custom Time",
+    "start": "Start",
+    "running": "Timer Running",
+    "autoDisableMessage": "Timer is active - Kid Mode will auto-disable when time expires"
+  },
+  "password": {
+    "setup": "Password Setup",
+    "setupDescription": "Set up a secure password to protect parental controls",
+    "prompt": "Enter Password",
+    "promptDescription": "Enter your password to access parental controls",
+    "enterPassword": "Enter Password",
+    "confirmPassword": "Confirm Password",
+    "passwordsMatch": "Passwords match!",
+    "passwordsDontMatch": "Passwords don't match",
+    "passwordRequired": "Password is required",
+    "minLength": "Password must be at least 6 characters",
+    "unlock": "Unlock",
+    "create": "Create Password",
+    "success": "Password set successfully!"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "languageDescription": "Choose your preferred language",
+    "passwordManagement": "Password Management",
+    "changePassword": "Change Password",
+    "changePasswordDescription": "Update your parental control password",
+    "resetData": "Reset Data",
+    "resetDataDescription": "Clear all app data and start fresh",
+    "reset": "Reset App Data",
+    "confirmReset": "Are you sure you want to reset all app data? This action cannot be undone."
+  },
+  "common": {
+    "minutes": "min",
+    "hours": "h",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "back": "Back"
+  }
+}

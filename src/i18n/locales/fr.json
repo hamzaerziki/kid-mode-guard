@@ -1,0 +1,63 @@
+{
+  "navbar": {
+    "title": "Panneau Parental",
+    "dashboard": "Tableau de bord",
+    "timer": "Minuteur",
+    "settings": "Paramètres"
+  },
+  "kidMode": {
+    "title": "Mode Enfant",
+    "activeDescription": "L'accès Internet est restreint",
+    "inactiveDescription": "L'accès Internet est autorisé",
+    "blocked": "Bloqué",
+    "active": "Actif",
+    "timeRemaining": "Temps restant",
+    "activate": "Activer le Mode Enfant",
+    "deactivate": "Désactiver le Mode Enfant",
+    "restrictedMessage": "L'accès Internet de votre enfant est maintenant restreint",
+    "allowedMessage": "Votre enfant a un accès Internet complet"
+  },
+  "timer": {
+    "title": "Contrôles du Minuteur",
+    "quickSelect": "Sélection rapide",
+    "customTime": "Temps personnalisé",
+    "start": "Démarrer",
+    "running": "Minuteur en cours",
+    "autoDisableMessage": "Le minuteur est actif - Le Mode Enfant se désactivera automatiquement à la fin"
+  },
+  "password": {
+    "setup": "Configuration du mot de passe",
+    "setupDescription": "Configurez un mot de passe sécurisé pour protéger les contrôles parentaux",
+    "prompt": "Entrez le mot de passe",
+    "promptDescription": "Entrez votre mot de passe pour accéder aux contrôles parentaux",
+    "enterPassword": "Entrez le mot de passe",
+    "confirmPassword": "Confirmez le mot de passe",
+    "passwordsMatch": "Les mots de passe correspondent !",
+    "passwordsDontMatch": "Les mots de passe ne correspondent pas",
+    "passwordRequired": "Le mot de passe est requis",
+    "minLength": "Le mot de passe doit contenir au moins 6 caractères",
+    "unlock": "Déverrouiller",
+    "create": "Créer le mot de passe",
+    "success": "Mot de passe défini avec succès !"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "language": "Langue",
+    "languageDescription": "Choisissez votre langue préférée",
+    "passwordManagement": "Gestion du mot de passe",
+    "changePassword": "Changer le mot de passe",
+    "changePasswordDescription": "Mettre à jour votre mot de passe de contrôle parental",
+    "resetData": "Réinitialiser les données",
+    "resetDataDescription": "Effacer toutes les données de l'application et recommencer",
+    "reset": "Réinitialiser les données",
+    "confirmReset": "Êtes-vous sûr de vouloir réinitialiser toutes les données de l'application ? Cette action ne peut pas être annulée."
+  },
+  "common": {
+    "minutes": "min",
+    "hours": "h",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "save": "Enregistrer",
+    "back": "Retour"
+  }
+}

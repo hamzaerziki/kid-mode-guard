@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Eye, EyeOff } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 
 interface PasswordSetupProps {
   onPasswordSet: (password: string) => void;
@@ -15,14 +16,15 @@ export const PasswordSetup = ({ onPasswordSet }: PasswordSetupProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (password.length < 4) {
+    if (password.length < 6) {
       toast({
-        title: "Password too short",
-        description: "Password must be at least 4 characters long",
+        title: t("password.passwordRequired"),
+        description: t("password.minLength"),
         variant: "destructive",
       });
       return;
@@ -30,8 +32,8 @@ export const PasswordSetup = ({ onPasswordSet }: PasswordSetupProps) => {
 
     if (password !== confirmPassword) {
       toast({
-        title: "Passwords don't match",
-        description: "Please make sure both passwords are identical",
+        title: t("password.passwordsDontMatch"),
+        description: t("password.passwordsDontMatch"),
         variant: "destructive",
       });
       return;
@@ -39,8 +41,8 @@ export const PasswordSetup = ({ onPasswordSet }: PasswordSetupProps) => {
 
     onPasswordSet(password);
     toast({
-      title: "Password set successfully!",
-      description: "Your parental controls are now active",
+      title: t("password.success"),
+      description: t("password.success"),
     });
   };
 
@@ -51,21 +53,21 @@ export const PasswordSetup = ({ onPasswordSet }: PasswordSetupProps) => {
           <div className="mx-auto mb-4 p-3 bg-primary/10 rounded-full w-fit">
             <Shield className="h-8 w-8 text-primary" />
           </div>
-          <CardTitle className="text-2xl font-bold text-parentControl">Welcome to Parental Panel</CardTitle>
+          <CardTitle className="text-2xl font-bold text-parentControl">{t("navbar.title")}</CardTitle>
           <CardDescription className="text-muted-foreground">
-            Set up a secure password to control Kid Mode
+            {t("password.setupDescription")}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <label className="text-sm font-medium text-parentControl">
-                Create Password
+                {t("password.enterPassword")}
               </label>
               <div className="relative">
                 <Input
                   type={showPassword ? "text" : "password"}
-                  placeholder="Enter password"
+                  placeholder={t("password.enterPassword")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="border-primary/20 focus:border-primary pr-10"
@@ -89,12 +91,12 @@ export const PasswordSetup = ({ onPasswordSet }: PasswordSetupProps) => {
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-parentControl">
-                Confirm Password
+                {t("password.confirmPassword")}
               </label>
               <div className="relative">
                 <Input
                   type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Confirm password"
+                  placeholder={t("password.confirmPassword")}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   className="border-primary/20 focus:border-primary pr-10"
@@ -121,7 +123,7 @@ export const PasswordSetup = ({ onPasswordSet }: PasswordSetupProps) => {
               className="w-full bg-gradient-primary hover:shadow-button transition-all duration-300"
             >
               <Shield className="mr-2 h-4 w-4" />
-              Secure My Family
+              {t("password.create")}
             </Button>
           </form>
 

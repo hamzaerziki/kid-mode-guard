@@ -1,0 +1,63 @@
+{
+  "navbar": {
+    "title": "لوحة التحكم الأبوية",
+    "dashboard": "لوحة القيادة",
+    "timer": "المؤقت",
+    "settings": "الإعدادات"
+  },
+  "kidMode": {
+    "title": "وضع الطفل",
+    "activeDescription": "الوصول للإنترنت مقيد",
+    "inactiveDescription": "الوصول للإنترنت مسموح",
+    "blocked": "محظور",
+    "active": "نشط",
+    "timeRemaining": "الوقت المتبقي",
+    "activate": "تفعيل وضع الطفل",
+    "deactivate": "إلغاء وضع الطفل",
+    "restrictedMessage": "تم تقييد وصول طفلك للإنترنت",
+    "allowedMessage": "طفلك لديه وصول كامل للإنترنت"
+  },
+  "timer": {
+    "title": "عناصر التحكم في المؤقت",
+    "quickSelect": "اختيار سريع",
+    "customTime": "وقت مخصص",
+    "start": "بدء",
+    "running": "المؤقت يعمل",
+    "autoDisableMessage": "المؤقت نشط - سيتم إلغاء وضع الطفل تلقائياً عند انتهاء الوقت"
+  },
+  "password": {
+    "setup": "إعداد كلمة المرور",
+    "setupDescription": "قم بإعداد كلمة مرور آمنة لحماية الضوابط الأبوية",
+    "prompt": "أدخل كلمة المرور",
+    "promptDescription": "أدخل كلمة المرور للوصول إلى الضوابط الأبوية",
+    "enterPassword": "أدخل كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "passwordsMatch": "كلمات المرور متطابقة!",
+    "passwordsDontMatch": "كلمات المرور غير متطابقة",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "minLength": "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
+    "unlock": "إلغاء القفل",
+    "create": "إنشاء كلمة المرور",
+    "success": "تم تعيين كلمة المرور بنجاح!"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "language": "اللغة",
+    "languageDescription": "اختر لغتك المفضلة",
+    "passwordManagement": "إدارة كلمة المرور",
+    "changePassword": "تغيير كلمة المرور",
+    "changePasswordDescription": "تحديث كلمة مرور الرقابة الأبوية",
+    "resetData": "إعادة تعيين البيانات",
+    "resetDataDescription": "مسح جميع بيانات التطبيق والبدء من جديد",
+    "reset": "إعادة تعيين بيانات التطبيق",
+    "confirmReset": "هل أنت متأكد من رغبتك في إعادة تعيين جميع بيانات التطبيق؟ لا يمكن التراجع عن هذا الإجراء."
+  },
+  "common": {
+    "minutes": "دقيقة",
+    "hours": "ساعة",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "save": "حفظ",
+    "back": "العودة"
+  }
+}

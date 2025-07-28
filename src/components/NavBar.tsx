@@ -2,14 +2,16 @@ import { Button } from "@/components/ui/button";
 import { Shield, Settings, Home, Clock } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 export const NavBar = () => {
   const location = useLocation();
+  const { t } = useTranslation();
 
   const navItems = [
-    { path: "/", label: "Dashboard", icon: Home },
-    { path: "/timer", label: "Timer", icon: Clock },
-    { path: "/settings", label: "Settings", icon: Settings },
+    { path: "/", label: t("navbar.dashboard"), icon: Home },
+    { path: "/timer", label: t("navbar.timer"), icon: Clock },
+    { path: "/settings", label: t("navbar.settings"), icon: Settings },
   ];
 
   return (
@@ -20,7 +22,7 @@ export const NavBar = () => {
             <div className="p-2 bg-primary/10 rounded-lg">
               <Shield className="h-6 w-6 text-primary" />
             </div>
-            <span className="text-lg font-bold text-parentControl">Parental Panel</span>
+            <span className="text-lg font-bold text-parentControl">{t("navbar.title")}</span>
           </div>
         </div>
         
