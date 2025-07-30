@@ -115,22 +115,22 @@ export const Dashboard = ({ password }: DashboardProps) => {
     <div className="min-h-screen bg-background">
       <NavBar />
       
-      <div className="max-w-md mx-auto p-4 space-y-6">
+      <div className="max-w-md mx-auto p-3 sm:p-4 space-y-4 sm:space-y-6">
         {/* Status Overview */}
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-3 sm:gap-4">
           {getStatusCards().map((card, index) => (
-            <Card key={index} className={`${card.bgColor} border-0`}>
-              <CardContent className="p-4">
+            <Card key={index} className={`${card.bgColor} border border-border/50`}>
+              <CardContent className="p-3 sm:p-4">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <CardDescription className="text-sm text-muted-foreground">
+                  <div className="min-w-0 flex-1">
+                    <CardDescription className="text-xs sm:text-sm text-muted-foreground">
                       {card.title}
                     </CardDescription>
-                    <div className={`text-lg font-semibold ${card.color}`}>
+                    <div className={`text-base sm:text-lg font-semibold ${card.color} truncate`}>
                       {card.value}
                     </div>
                   </div>
-                  <card.icon className={`h-8 w-8 ${card.color}`} />
+                  <card.icon className={`h-6 w-6 sm:h-8 sm:w-8 ${card.color} flex-shrink-0`} />
                 </div>
               </CardContent>
             </Card>
@@ -145,17 +145,17 @@ export const Dashboard = ({ password }: DashboardProps) => {
         />
 
         {/* Quick Timer Actions */}
-        <Card className="bg-gradient-card border-primary/10 shadow-card">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-lg font-semibold text-parentControl">
+        <Card className="bg-card border-border shadow-card">
+          <CardHeader className="pb-3 sm:pb-4">
+            <CardTitle className="text-base sm:text-lg font-semibold text-parentControl">
               Quick Timers
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-sm">
               Activate Kid Mode for a set time period
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
               {[
                 { label: "15 min", value: 15 },
                 { label: "30 min", value: 30 },
@@ -167,9 +167,9 @@ export const Dashboard = ({ password }: DashboardProps) => {
                   variant="outline"
                   onClick={() => startQuickTimer(timer.value)}
                   disabled={kidModeActive}
-                  className="hover:border-primary/50 hover:bg-primary/5"
+                  className="hover:border-primary/50 hover:bg-primary/5 text-sm h-10 sm:h-11"
                 >
-                  <Clock className="mr-2 h-4 w-4" />
+                  <Clock className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                   {timer.label}
                 </Button>
               ))}
@@ -178,15 +178,15 @@ export const Dashboard = ({ password }: DashboardProps) => {
         </Card>
 
         {/* Tips Card */}
-        <Card className="bg-gradient-secondary/5 border-secondary/20">
-          <CardContent className="p-4">
+        <Card className="bg-secondary/5 border-secondary/20">
+          <CardContent className="p-3 sm:p-4">
             <div className="flex items-start space-x-3">
-              <div className="p-2 bg-secondary/10 rounded-lg">
-                <Shield className="h-5 w-5 text-secondary" />
+              <div className="p-1.5 sm:p-2 bg-secondary/10 rounded-lg flex-shrink-0">
+                <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-secondary" />
               </div>
-              <div>
-                <h3 className="font-medium text-parentControl mb-1">Parenting Tip</h3>
-                <p className="text-sm text-muted-foreground">
+              <div className="min-w-0 flex-1">
+                <h3 className="font-medium text-parentControl mb-1 text-sm sm:text-base">Parenting Tip</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Set consistent internet time limits and communicate expectations clearly with your child.
                 </p>
               </div>
