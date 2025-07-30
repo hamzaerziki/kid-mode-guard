@@ -2,11 +2,12 @@ import { useState } from "react";
 import { NavBar } from "@/components/NavBar";
 import { PasswordPrompt } from "@/components/PasswordPrompt";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { Settings, Shield, Bell, Eye, EyeOff, Smartphone, Info, Globe } from "lucide-react";
+import { Settings, Shield, Bell, Eye, EyeOff, Smartphone, Info, Globe, Monitor } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 
@@ -23,7 +24,6 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [notifications, setNotifications] = useState(true);
-  const [autoLock, setAutoLock] = useState(false);
   const { toast } = useToast();
   const { t } = useTranslation();
 
@@ -101,6 +101,22 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
           </CardHeader>
           <CardContent>
             <LanguageSwitcher />
+          </CardContent>
+        </Card>
+
+        {/* Theme Settings */}
+        <Card className="bg-gradient-card border-primary/10 shadow-card">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg font-semibold text-parentControl flex items-center">
+              <Monitor className="mr-2 h-5 w-5 text-primary" />
+              {t("settings.theme.title")}
+            </CardTitle>
+            <CardDescription>
+              {t("settings.theme.description")}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ThemeToggle />
           </CardContent>
         </Card>
 
@@ -237,21 +253,6 @@ export const SettingsPage = ({ password, onPasswordChange }: SettingsPageProps) 
               />
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <div className="flex items-center space-x-2">
-                  <Shield className="h-4 w-4 text-muted-foreground" />
-                  <span className="font-medium text-parentControl">Auto-lock</span>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Require password after 5 minutes
-                </p>
-              </div>
-              <Switch
-                checked={autoLock}
-                onCheckedChange={setAutoLock}
-              />
-            </div>
           </CardContent>
         </Card>
 

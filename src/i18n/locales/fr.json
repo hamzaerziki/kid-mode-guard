@@ -44,6 +44,10 @@
     "title": "Paramètres",
     "language": "Langue",
     "languageDescription": "Choisissez votre langue préférée",
+    "theme": {
+      "title": "Thème",
+      "description": "Choisir le mode clair ou sombre"
+    },
     "passwordManagement": "Gestion du mot de passe",
     "changePassword": "Changer le mot de passe",
     "changePasswordDescription": "Mettre à jour votre mot de passe de contrôle parental",
@@ -51,6 +55,10 @@
     "resetDataDescription": "Effacer toutes les données de l'application et recommencer",
     "reset": "Réinitialiser les données",
     "confirmReset": "Êtes-vous sûr de vouloir réinitialiser toutes les données de l'application ? Cette action ne peut pas être annulée."
+  },
+  "theme": {
+    "light": "Mode Clair",
+    "dark": "Mode Sombre"
   },
   "common": {
     "minutes": "min",

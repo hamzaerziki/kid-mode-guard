@@ -116,13 +116,6 @@ export const TimerControls = ({
           {isKidModeActive ? t("timer.running") : `${t("timer.start")} ${formatTime(selectedTime)}`}
         </Button>
 
-        {isKidModeActive && (
-          <div className="text-center p-3 bg-kidMode-active/5 rounded-lg">
-            <p className="text-sm text-kidMode-active font-medium">
-              {t("timer.autoDisableMessage")}
-            </p>
-          </div>
-        )}
       </CardContent>
     </Card>
   );

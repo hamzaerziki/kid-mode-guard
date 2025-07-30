@@ -44,6 +44,10 @@
     "title": "Settings",
     "language": "Language",
     "languageDescription": "Choose your preferred language",
+    "theme": {
+      "title": "Theme",
+      "description": "Choose light or dark mode"
+    },
     "passwordManagement": "Password Management",
     "changePassword": "Change Password",
     "changePasswordDescription": "Update your parental control password",
@@ -51,6 +55,10 @@
     "resetDataDescription": "Clear all app data and start fresh",
     "reset": "Reset App Data",
     "confirmReset": "Are you sure you want to reset all app data? This action cannot be undone."
+  },
+  "theme": {
+    "light": "Light Mode",
+    "dark": "Dark Mode"
   },
   "common": {
     "minutes": "min",

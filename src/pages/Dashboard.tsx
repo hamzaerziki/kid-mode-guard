@@ -27,10 +27,9 @@ export const Dashboard = ({ password }: DashboardProps) => {
         setTimeRemaining((prev) => {
           if (prev <= 1) {
             setTimerActive(false);
-            setKidModeActive(false);
             toast({
               title: "Timer expired",
-              description: "Kid Mode has been automatically disabled",
+              description: "Timer has finished",
             });
             return 0;
           }
