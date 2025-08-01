@@ -58,7 +58,8 @@
   },
   "theme": {
     "light": "Light Mode",
-    "dark": "Dark Mode"
+    "dark": "Dark Mode",
+    "loading": "Loading..."
   },
   "common": {
     "minutes": "min",

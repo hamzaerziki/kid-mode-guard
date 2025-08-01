@@ -58,7 +58,8 @@
   },
   "theme": {
     "light": "Mode Clair",
-    "dark": "Mode Sombre"
+    "dark": "Mode Sombre",
+    "loading": "Chargement..."
   },
   "common": {
     "minutes": "min",

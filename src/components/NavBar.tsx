@@ -15,8 +15,8 @@ export const NavBar = () => {
   ];
 
   return (
-    <nav className="bg-card border-b border-border shadow-sm sticky top-0 z-40 backdrop-blur-sm">
-      <div className="max-w-md mx-auto px-4">
+    <nav className="bg-card border-b border-border shadow-sm sticky top-0 z-40 backdrop-blur-sm pt-safe-top">
+      <div className="max-w-md mx-auto px-4 pt-2">
         <div className="flex items-center justify-between h-14 sm:h-16">
           <div className="flex items-center space-x-2">
             <div className="p-1.5 sm:p-2 bg-primary/10 rounded-lg">

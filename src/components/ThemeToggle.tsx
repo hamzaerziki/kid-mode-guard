@@ -2,10 +2,25 @@ import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 
 export const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
   const { t } = useTranslation();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <Button variant="outline" size="sm" className="w-full" disabled>
+        <Sun className="h-4 w-4" />
+        <span className="ml-2">{t("theme.loading")}</span>
+      </Button>
+    );
+  }
 
   return (
     <Button
