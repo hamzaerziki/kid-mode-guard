@@ -27,11 +27,13 @@ export const ThemeToggle = () => {
       variant="outline"
       size="sm"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="w-full"
+      className="w-full relative"
     >
-      <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-      <span className="ml-2">
+      <div className="relative w-4 h-4 mr-2">
+        <Sun className="absolute h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+        <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+      </div>
+      <span>
         {theme === "light" ? t("theme.dark") : t("theme.light")}
       </span>
     </Button>
